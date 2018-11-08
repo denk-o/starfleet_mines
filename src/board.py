@@ -8,6 +8,7 @@ class board:
         self.ship = Ship()
         self.MOVES = ['north', 'south', 'east', 'west']
         self.PATTERNS = ['alpha', 'beta', 'gamma', 'delta']
+        self.ship_position = self.getShipPosition()
     def buildMinesArray(self):
         board = self.starting_board
         mines = []
@@ -18,6 +19,8 @@ class board:
         pos_x = 0
         pos_y = 0
         #TODO: decide whether to center ship at center of array or 0 center it
+        #lets just return the midpoint of the array for now we can adjsut in other methods
+
         return {x: pos_x, y: pos_y}
     def printBoard(self):
         board = self.current_board
