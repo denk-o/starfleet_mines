@@ -6,4 +6,3 @@ east
 gamma west
 south
 delta
-output
