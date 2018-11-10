@@ -7,9 +7,9 @@ class board:
         self.starting_board = start_board
         self.mines = self.buildMinesArray()
         self.num_mines = len(self.mines)
-        self.ship_start_position = self.getShipPosition()
-        self.current_board = board
         self.ship = spaceship()
+        self.ship_start_position = self.getShipPosition()
+        self.current_board = start_board
         self.MOVES = ['north', 'south', 'east', 'west']
         self.PATTERNS = ['alpha', 'beta', 'gamma', 'delta']
         self.ship_position = self.getShipPosition()
@@ -34,17 +34,15 @@ class board:
                     mines.append(mine(x_coordinate, y_coordinate, val))
         return mines
     def getShipPosition(self):
-        pos_x = 0
-        pos_y = 0
-        #TODO: decide whether to center ship at center of array or 0 center it
-        #lets just return the midpoint of the array for now we can adjsut in other methods
-
+        #delegate ship positioning to ship object
+        pos_x = self.ship.x
+        pos_y = self.ship.y
         return {'x': pos_x, 'y': pos_y}
     def printBoard(self):
         board = self.current_board
         for row in range(len(board)):
             for col in range(len(board[row])):
-                print(board[row][col] + ' ')
+                print(board[row][col], end=' ')
             print('\n')
     def doStep(self, step):
         move = step.move if step.move in self.MOVES else None
