@@ -1,27 +1,45 @@
+from mine import mine
+from spaceship import spaceship
+import math
+
 class board:
-    __init__(self, start_board):
-        self.starting_board = starting_board
+    def __init__(self, start_board):
+        self.starting_board = start_board
         self.mines = self.buildMinesArray()
         self.num_mines = len(self.mines)
         self.ship_start_position = self.getShipPosition()
         self.current_board = board
-        self.ship = Ship()
+        self.ship = spaceship()
         self.MOVES = ['north', 'south', 'east', 'west']
         self.PATTERNS = ['alpha', 'beta', 'gamma', 'delta']
         self.ship_position = self.getShipPosition()
     def buildMinesArray(self):
         board = self.starting_board
+        board_y_size = len(self.starting_board)
+        board_x_size = len(self.starting_board[0])
         mines = []
-        #TODO: build mines array
-
-        return mines[]
+        #assume square input matricies so we don't need two inputs
+        #at a later point we can add a helper function to clean our inputs
+        #so every input matrix can be set to be square
+        midpoint = math.floor(board_x_size/2)
+        #mine coordinates should be centered around ship
+        for row in range(board_y_size):
+            for col in range(board_x_size):
+                #convert from array indicies into cartesian coordinates
+                #check if value is a mine
+                val = self.starting_board[row][col]
+                if val != '.':
+                    x_coordinate = col - midpoint
+                    y_coordinate = midpoint - row
+                    mines.append(mine(x_coordinate, y_coordinate, val))
+        return mines
     def getShipPosition(self):
         pos_x = 0
         pos_y = 0
         #TODO: decide whether to center ship at center of array or 0 center it
         #lets just return the midpoint of the array for now we can adjsut in other methods
 
-        return {x: pos_x, y: pos_y}
+        return {'x': pos_x, 'y': pos_y}
     def printBoard(self):
         board = self.current_board
         for row in range(len(board)):
@@ -64,11 +82,11 @@ class board:
         y = position.y
         if move == 'north':
             print('north')
-        elif move = 'south':
+        elif move == 'south':
             print('south')
-        elif move = 'east':
+        elif move == 'east':
             print('east')
-        elif move = 'west':
+        elif move == 'west':
             print('west')
         else:
             print('end')
