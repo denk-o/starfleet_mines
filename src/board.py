@@ -42,8 +42,7 @@ class board:
         board = self.current_board
         for row in range(len(board)):
             for col in range(len(board[row])):
-                print(board[row][col], end=' ')
-            print('\n')
+                print(board[row][col], end='')
     def doStep(self, step):
         move = step.move if step.move in self.MOVES else None
         fire = step.fire if step.fire in self.PATTERNS else None
