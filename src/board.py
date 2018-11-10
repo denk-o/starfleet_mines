@@ -13,6 +13,8 @@ class board:
         self.MOVES = ['north', 'south', 'east', 'west']
         self.PATTERNS = ['alpha', 'beta', 'gamma', 'delta']
         self.ship_position = self.getShipPosition()
+        self.move_count = 0
+        self.fire_count = 0
     def buildMinesArray(self):
         board = self.starting_board
         board_y_size = len(self.starting_board)
@@ -44,19 +46,20 @@ class board:
             for col in range(len(board[row])):
                 print(board[row][col], end='')
     def doStep(self, step):
-        move = step.move if step.move in self.MOVES else None
-        fire = step.fire if step.fire in self.PATTERNS else None
+        #we should be able to manage our inputs better for now these if statements are satsifactory
+        fire = step[0] if step[0] in self.PATTERNS else False
+        move = False
+        if  not fire:
+            move = step[0] if step[0] in self.MOVES else False
+        elif len(step) == 2:
+            move = step[1] if step[1] in self.MOVES else False
         if fire:
-            self.ship.fire(fire)
             self.fire_torpedos(fire)
         if move:
-            self.ship.move(move)
             self.move_ship(move)
     def fire_torpedos(self, pattern):
         #TODO: DEFINE HELPER FUNCTION AFTER DECIDING COORDINATE SYSTEM
         position = self.getShipPosition()
-        x = position.x
-        y = position.y
         if pattern == 'alpha':
             #do alpha
             print('alpha')
@@ -73,18 +76,23 @@ class board:
             #do nothing
             print('end')
     def move_ship(self, move):
-        #TODO: DEFINE HELPER FUNCTION AFTER DECIDING COORDINATE SYSTEM
         position = self.getShipPosition()
-        x = position.x
-        y = position.y
+
         if move == 'north':
+            self.ship.north()
+            move_count = self.ship.increment_moves()
             print('north')
         elif move == 'south':
+            self.ship.south()
+            move_count = self.ship.increment_moves()
             print('south')
         elif move == 'east':
+            self.ship.east()
+            mvoe_count = self.ship.increment_moves()
             print('east')
         elif move == 'west':
+            self.ship.west()
+            move_count = self.ship.increment_moves()
             print('west')
         else:
-            print('end')
-        self.center_board()
+            print('NONE')
