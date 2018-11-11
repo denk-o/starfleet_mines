@@ -63,7 +63,7 @@ class board:
         if move:
             self.move_ship(move)
         self.z_position = self.z_position + 1
-
+        self.updateBoard()
     def doAlpha(self, position):
         mines = self.mines
         x = position['x']
@@ -197,3 +197,14 @@ class board:
             return 'PASS'
         else:
             return True
+    def updateBoard(self):
+        #update the visual aspect of the board
+        board = self.current_board
+        mines = self.mines
+        for mine in mines:
+            #move the mines closer
+            mine.dist = mine.dist - 1
+            mine.convertToChar()
+            #update the values on the board
+            board[mine.row][mine.col] = mine.z_dist
+        self.mines = mines
