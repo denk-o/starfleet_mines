@@ -52,6 +52,8 @@ class board:
             print('')
     def doStep(self, step):
         #we should be able to manage our inputs better for now these if statements are satsifactory
+
+        self.updateBoard()
         fire = step[0] if step[0] in self.PATTERNS else False
         move = False
         if  not fire:
@@ -63,7 +65,6 @@ class board:
         if move:
             self.move_ship(move)
         self.z_position = self.z_position + 1
-        self.updateBoard()
     def doAlpha(self, position):
         mines = self.mines
         x = position['x']
