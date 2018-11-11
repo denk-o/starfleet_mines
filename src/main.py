@@ -21,8 +21,8 @@ print('-------------')
 step_count = 0
 for step in steps:
     print('step', step)
-    my_board.doStep(step)
     my_board.printBoard()
+    my_board.doStep(step)
     res = my_board.evalBoardState()
 
     print('Ship is at (', my_board.getShipPosition()['x'],', ',my_board.getShipPosition()['y'],')')
