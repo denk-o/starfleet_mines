@@ -13,8 +13,6 @@ for line in script_file:
     steps.append(line.rstrip('\n').split(' '))
 my_board = board(input_board)
 
-print('Starting Board')
-my_board.printBoard()
 print('-------------')
 print('Starting Script')
 print('-------------')

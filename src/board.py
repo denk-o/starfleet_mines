@@ -201,10 +201,31 @@ class board:
         #update the visual aspect of the board
         board = self.current_board
         mines = self.mines
+        position = self.getShipPosition()
+        x = position['x']
+        y = position['y']
+        max_x = 0
+        max_y = 0
         for mine in mines:
-            #move the mines closer
-            mine.dist = mine.dist - 1
-            mine.convertToChar()
-            #update the values on the board
-            board[mine.row][mine.col] = mine.z_dist
+            if mine.is_alive:
+                #move the mines closer
+                mine.dist = mine.dist - 1
+                mine.convertToChar()
+
+                #trim/grow the board
+                #to do this we find the longest horizontal and vertical distance to a mine
+                #double and add 1 to it to generate the distance
+                max_x = max_x if max_x > abs(x-mine.x) else abs(x-mine.x)
+                max_y = max_y if max_y > abs(y-mine.y) else abs(y-mine.y)
+
+                #update mine coordinates
+                row = mine.row if mine.row<len(board) else len(board)-1
+                col = mine.col if mine.col<len(board[0]) else len(board[0])-1
+                board[row][col] = mine.z_dist
+        #generate a new board
+        new_board = [['.' for i in range(2*max_x+1)] for j in range(2*max_y+1)]
+        #populate mines in new board
+        # for mine in mines:
+        #     new_board[max_y - mine.y]
+        self.current_board = new_board
         self.mines = mines
