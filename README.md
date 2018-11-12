@@ -108,6 +108,7 @@ To alter the inputs, modify src/field_file.txt and src/script_file.txt
   <summary>convertToChar()</summary>
   Reverse conversion used to calculate mine updated distance and build a character
 </details>
+
 ## Thought Process of Solution
 On initial inspection of the problem statement, it was clear that at some level, this was an array manipulation problem where the data would be represented as a 2D array. However, it then occurred to me to see if it would be possible to limit usage of the array data structure purely to display and then to represent the state of the cuboid by only the position of the mines and the position of the ship. It is in this way that I decided to implement the majority of the codebase.
 
