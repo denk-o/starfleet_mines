@@ -220,13 +220,21 @@ class board:
                 max_y = max_y if max_y > abs(y-mine.y) else abs(y-mine.y)
 
                 #update mine coordinates
-                row = mine.row if mine.row<len(board) else len(board)-1
-                col = mine.col if mine.col<len(board[0]) else len(board[0])-1
-                board[row][col] = mine.z_dist
+                #not sure if this step is necessary if we just recalc in new board
+                # row = mine.row if mine.row<len(board) else len(board)-1
+                # col = mine.col if mine.col<len(board[0]) else len(board[0])-1
+                # board[row][col] = mine.z_dist
         #generate a new board
         new_board = [['.' for i in range(2*max_x+1)] for j in range(2*max_y+1)]
         #populate mines in new board
-        # for mine in mines:
-        #     new_board[max_y - mine.y]
+        for mine in mines:
+            if mine.is_alive:
+                #we have the original position of the mine and it's x, y coordinate
+                #we need to convert that to matrix location in the new matrix
+                #calculate new mine coordinates in the new board
+                #currently this is definitely incorrect representation
+                row = math.floor(len(new_board)/2)+(y-mine.y)
+                col = math.floor(len(new_board[0])/2)+(x-mine.x)
+                new_board[row][col] = mine.z_dist
         self.current_board = new_board
         self.mines = mines
