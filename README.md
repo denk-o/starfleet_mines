@@ -145,3 +145,4 @@ The code I wrote has some definite inefficiencies that I observed while implemen
     - There were quite a few restrictions that I placed on inputs. Such as Assumptions 1 and 3. I did this to create a simpler implementation. I figure, in the future it is relatively trivial to implement some sort of method to clean inputs so they are properly read in.
     - I found it remarkably helpful to plan out my prototyping in a notebook before actually going to the keyboard. It definitely helped me to write everything out before diving in and implementing.
     - As a follow up, writing up my thoughts is easier when I have that scrawled on paper as little notes.
+    - Writing this README has also introduced me to properly learning how to use Markdown, my initial attempt seems pretty sloppy.
