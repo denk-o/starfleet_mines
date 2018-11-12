@@ -232,7 +232,7 @@ class board:
                 #we have the original position of the mine and it's x, y coordinate
                 #we need to convert that to matrix location in the new matrix
                 #calculate new mine coordinates in the new board
-                #currently this is definitely incorrect representation
+                #we do a reverse of the buildMinesArray calculation
                 row = math.floor(len(new_board)/2)+(y-mine.y)
                 col = math.floor(len(new_board[0])/2)+(x-mine.x)
                 new_board[row][col] = mine.z_dist
